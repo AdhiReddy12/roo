@@ -96,17 +96,6 @@ Open **http://localhost:5173/** in your browser.
 
 ---
 
-## 👥 Team
-
-| Role | Responsibility |
-|------|---------------|
-| Frontend Developer | React UI, routing, state management, Recharts |
-| Backend Developer | FastAPI APIs, MongoDB, authentication, streak logic |
-| ML Engineer 1 | MediaPipe posture detection, webcam integration |
-| ML Engineer 2 | Food recognition, workout recommendation engine |
-
----
-
 ## 📄 License
 
 This project was created as a B.Tech final year submission.
