@@ -5,6 +5,44 @@ import './Workout.css';
 
 const TABS = ['Live Posture', 'Suggested Plan', 'Log Workout'];
 
+const EQUIPMENT_OPTIONS = [
+    'No Equipment',
+    'Dumbbells',
+    'Barbell',
+    'Kettlebell',
+    'Resistance Bands',
+    'Pull-up Bar',
+    'Bench',
+    'Cable Machine',
+    'Treadmill',
+    'Stationary Bike',
+    'Rowing Machine',
+    'Smith Machine',
+    'Leg Press',
+    'Medicine Ball',
+    'TRX / Suspension Trainer',
+    'Foam Roller',
+    'Jump Rope',
+    'Yoga Mat',
+];
+
+const GOAL_OPTIONS = [
+    { value: 'lose_weight', label: '🔥 Lose Weight' },
+    { value: 'build_muscle', label: '💪 Build Muscle' },
+    { value: 'stay_fit', label: '🏃 Stay Fit' },
+    { value: 'gain_weight', label: '⬆️ Gain Weight' },
+    { value: 'increase_endurance', label: '🫁 Increase Endurance' },
+    { value: 'improve_flexibility', label: '🧘 Improve Flexibility' },
+];
+
+const WIZARD_STEPS = [
+    { key: 'age', label: 'How old are you?', icon: '🎂' },
+    { key: 'weight', label: 'What\'s your weight?', icon: '⚖️' },
+    { key: 'height', label: 'What\'s your height?', icon: '📏' },
+    { key: 'equipment', label: 'What equipment do you have?', icon: '🏋️' },
+    { key: 'goal', label: 'What\'s your fitness goal?', icon: '🎯' },
+];
+
 export default function Workout() {
     const { token } = useAuth();
     const [activeTab, setActiveTab] = useState('Suggested Plan');
@@ -13,6 +51,17 @@ export default function Workout() {
     const [plan, setPlan] = useState(null);
     const [planLoading, setPlanLoading] = useState(false);
     const [planError, setPlanError] = useState('');
+
+    // Wizard state
+    const [wizardActive, setWizardActive] = useState(false);
+    const [wizardStep, setWizardStep] = useState(0);
+    const [wizardData, setWizardData] = useState({
+        age: '',
+        weight: '',
+        height: '',
+        equipment: [],
+        goal: '',
+    });
 
     // Log Workout state
     const [logForm, setLogForm] = useState({ workout_name: '', duration: '', calories_burned: '', date: '' });
@@ -23,12 +72,67 @@ export default function Workout() {
     // Posture state
     const [cameraActive, setCameraActive] = useState(false);
 
-    // -- Suggested Plan handlers --
-    const handleCreatePlan = async () => {
+    // -- Wizard helpers --
+    const currentStep = WIZARD_STEPS[wizardStep];
+    const isNoEquipment = wizardData.equipment.includes('No Equipment');
+
+    const canGoNext = () => {
+        const val = wizardData[currentStep.key];
+        if (currentStep.key === 'equipment') return wizardData.equipment.length > 0;
+        if (currentStep.key === 'goal') return val !== '';
+        return val !== '' && Number(val) > 0;
+    };
+
+    const handleWizardNext = () => {
+        if (wizardStep < WIZARD_STEPS.length - 1) {
+            setWizardStep(wizardStep + 1);
+        } else {
+            handleGeneratePlan();
+        }
+    };
+
+    const handleWizardBack = () => {
+        if (wizardStep > 0) setWizardStep(wizardStep - 1);
+    };
+
+    const handleEquipmentToggle = (equip) => {
+        let updated;
+        if (equip === 'No Equipment') {
+            // If selecting "No Equipment", deselect everything else
+            updated = wizardData.equipment.includes('No Equipment') ? [] : ['No Equipment'];
+        } else {
+            // Remove "No Equipment" if selecting any other equipment
+            const filtered = wizardData.equipment.filter((e) => e !== 'No Equipment');
+            if (filtered.includes(equip)) {
+                updated = filtered.filter((e) => e !== equip);
+            } else {
+                updated = [...filtered, equip];
+            }
+        }
+        setWizardData({ ...wizardData, equipment: updated });
+    };
+
+    const startWizard = () => {
+        setWizardActive(true);
+        setWizardStep(0);
+        setWizardData({ age: '', weight: '', height: '', equipment: [], goal: '' });
+        setPlan(null);
+        setPlanError('');
+    };
+
+    // -- Generate plan from wizard data --
+    const handleGeneratePlan = async () => {
+        setWizardActive(false);
         setPlanLoading(true);
         setPlanError('');
         try {
-            const data = await generateWorkoutPlan(token);
+            const data = await generateWorkoutPlan(token, {
+                age: parseInt(wizardData.age),
+                weight: parseFloat(wizardData.weight),
+                height: parseFloat(wizardData.height),
+                equipment: wizardData.equipment,
+                goal: wizardData.goal,
+            });
             setPlan(data);
         } catch (err) {
             setPlanError(err.message);
@@ -64,7 +168,6 @@ export default function Workout() {
     // -- Posture handler --
     const handleStartCamera = async () => {
         setCameraActive(true);
-        // MediaPipe integration will run in the video element via useEffect in Phase 4
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             const video = document.getElementById('posture-video');
@@ -85,6 +188,74 @@ export default function Workout() {
             video.srcObject = null;
         }
         setCameraActive(false);
+    };
+
+    // -- Render wizard step content --
+    const renderWizardContent = () => {
+        const step = currentStep;
+
+        if (step.key === 'age' || step.key === 'weight' || step.key === 'height') {
+            const units = step.key === 'weight' ? 'kg' : step.key === 'height' ? 'cm' : 'years';
+            const placeholder = step.key === 'age' ? '25' : step.key === 'weight' ? '70' : '175';
+            return (
+                <div className="wizard-input-wrap">
+                    <div className="input-field wizard-number-input">
+                        <span className="icon">{step.icon}</span>
+                        <input
+                            type="number"
+                            placeholder={placeholder}
+                            value={wizardData[step.key]}
+                            onChange={(e) => setWizardData({ ...wizardData, [step.key]: e.target.value })}
+                            min="1"
+                            autoFocus
+                        />
+                        <span className="wizard-unit">{units}</span>
+                    </div>
+                </div>
+            );
+        }
+
+        if (step.key === 'equipment') {
+            return (
+                <div className="wizard-equipment-grid">
+                    {EQUIPMENT_OPTIONS.map((equip) => {
+                        const isSelected = wizardData.equipment.includes(equip);
+                        const isDisabled = equip !== 'No Equipment' && isNoEquipment;
+                        return (
+                            <button
+                                key={equip}
+                                type="button"
+                                className={`equipment-chip ${isSelected ? 'selected' : ''} ${isDisabled ? 'disabled' : ''} ${equip === 'No Equipment' ? 'no-equip' : ''}`}
+                                onClick={() => !isDisabled && handleEquipmentToggle(equip)}
+                                disabled={isDisabled}
+                            >
+                                {equip}
+                                {isSelected && <span className="chip-check">✓</span>}
+                            </button>
+                        );
+                    })}
+                </div>
+            );
+        }
+
+        if (step.key === 'goal') {
+            return (
+                <div className="wizard-input-wrap">
+                    <div className="input-field wizard-number-input">
+                        <span className="icon">🎯</span>
+                        <input
+                            type="text"
+                            placeholder="e.g. Lose 5kg in 2 months"
+                            value={wizardData.goal}
+                            onChange={(e) => setWizardData({ ...wizardData, goal: e.target.value })}
+                            autoFocus
+                        />
+                    </div>
+                </div>
+            );
+        }
+
+        return null;
     };
 
     return (
@@ -108,23 +279,86 @@ export default function Workout() {
                 {/* ========== SUGGESTED PLAN ========== */}
                 {activeTab === 'Suggested Plan' && (
                     <div className="glass-card suggested-plan-card">
+                        {/* Header */}
                         <div className="suggested-plan-header">
                             <h3>💪 Create Suggested Plan</h3>
-                            <button className="create-plan-btn" onClick={handleCreatePlan} disabled={planLoading}>
+                            <button className="create-plan-btn" onClick={startWizard} disabled={planLoading}>
                                 {planLoading ? '⏳ Generating…' : '✨ Create Plan'}
                             </button>
                         </div>
 
                         {planError && <div className="plan-error">{planError}</div>}
 
-                        {!plan && !planLoading && (
+                        {/* ===== WIZARD ===== */}
+                        {wizardActive && (
+                            <div className="wizard-overlay">
+                                <div className="wizard-card glass-card">
+                                    {/* Progress bar */}
+                                    <div className="wizard-progress">
+                                        {WIZARD_STEPS.map((s, i) => (
+                                            <div key={s.key} className={`wizard-dot ${i <= wizardStep ? 'active' : ''} ${i < wizardStep ? 'done' : ''}`}>
+                                                {i < wizardStep ? '✓' : i + 1}
+                                            </div>
+                                        ))}
+                                        <div className="wizard-progress-line">
+                                            <div className="wizard-progress-fill" style={{ width: `${(wizardStep / (WIZARD_STEPS.length - 1)) * 100}%` }} />
+                                        </div>
+                                    </div>
+
+                                    {/* Step label */}
+                                    <div className="wizard-step-header">
+                                        <span className="wizard-step-icon">{currentStep.icon}</span>
+                                        <h3>{currentStep.label}</h3>
+                                        <p className="wizard-step-count">Step {wizardStep + 1} of {WIZARD_STEPS.length}</p>
+                                    </div>
+
+                                    {/* Step content */}
+                                    <div className="wizard-step-content">
+                                        {renderWizardContent()}
+                                    </div>
+
+                                    {/* Navigation buttons */}
+                                    <div className="wizard-nav">
+                                        {wizardStep > 0 ? (
+                                            <button type="button" className="wizard-btn-back" onClick={handleWizardBack}>
+                                                ← Back
+                                            </button>
+                                        ) : (
+                                            <button type="button" className="wizard-btn-back" onClick={() => setWizardActive(false)}>
+                                                ✕ Cancel
+                                            </button>
+                                        )}
+                                        <button
+                                            type="button"
+                                            className="wizard-btn-next"
+                                            onClick={handleWizardNext}
+                                            disabled={!canGoNext()}
+                                        >
+                                            {wizardStep === WIZARD_STEPS.length - 1 ? '🚀 Generate Plan' : 'Next →'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Empty state */}
+                        {!plan && !planLoading && !wizardActive && (
                             <div className="empty-plan">
                                 <div className="empty-icon">💪</div>
                                 <p>Click <span className="accent">"Create Plan"</span> to get a personalized workout based on your goals</p>
                             </div>
                         )}
 
-                        {plan && (
+                        {/* Loading */}
+                        {planLoading && (
+                            <div className="empty-plan">
+                                <div className="spinner" />
+                                <p style={{ marginTop: '12px' }}>Generating your personalized plan…</p>
+                            </div>
+                        )}
+
+                        {/* Plan result */}
+                        {plan && !wizardActive && (
                             <div className="plan-result">
                                 <div className="plan-summary">
                                     <div className="plan-stat">

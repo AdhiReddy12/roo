@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         if (token) {
+            // fetchProfile now returns raw demo data (fetch is commented out inside)
             fetchProfile(token)
                 .then((data) => {
                     setUser(data);
