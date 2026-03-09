@@ -46,23 +46,6 @@ Iron-Pulse/
 │
 └── README.md
 ```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- **Node.js** ≥ 18
-- **Python** ≥ 3.10
-- **MongoDB** running locally on `mongodb://localhost:27017`
-
-### Backend Setup
-```bash
-cd backend
-pip install -r requirements.txt
-python -m uvicorn main:app --reload --port 8000
-```
-
 ### Frontend Setup
 ```bash
 cd frontend
