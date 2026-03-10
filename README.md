@@ -46,23 +46,6 @@ Iron-Pulse/
 │
 └── README.md
 ```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- **Node.js** ≥ 18
-- **Python** ≥ 3.10
-- **MongoDB** running locally on `mongodb://localhost:27017`
-
-### Backend Setup
-```bash
-cd backend
-pip install -r requirements.txt
-python -m uvicorn main:app --reload --port 8000
-```
-
 ### Frontend Setup
 ```bash
 cd frontend
@@ -110,17 +93,6 @@ Open **http://localhost:5173/** in your browser.
 - **🍽️ Food Tracking** — search 20+ foods, one-click logging, macro progress bars
 - **🔥 Streak System** — consecutive workout day tracking
 - **🌙 Premium Dark Theme** — glassmorphism, emerald accents, micro-animations
-
----
-
-## 👥 Team
-
-| Role | Responsibility |
-|------|---------------|
-| Frontend Developer | React UI, routing, state management, Recharts |
-| Backend Developer | FastAPI APIs, MongoDB, authentication, streak logic |
-| ML Engineer 1 | MediaPipe posture detection, webcam integration |
-| ML Engineer 2 | Food recognition, workout recommendation engine |
 
 ---
 
