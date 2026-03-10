@@ -127,3 +127,89 @@ Open **http://localhost:5173/** in your browser.
 ## 📄 License
 
 This project was created as a B.Tech final year submission.
+
+create plan update 
+    remove unnassary option option in equipment and add gym plan
+
+Add option to add his workout
+    
+goal
+    1.Fat Loss
+    2.Muscle Gain
+    3.Strength    
+    4.Endurance
+    5.General Fitness
+
+new options 
+
+Gender
+Type: Dropdown
+
+Options: Male, Female.
+
+Fitness Level / Experience
+Type: Dropdown
+Options:
+Beginner
+Intermediate
+Advanced
+
+
+workout days per week 
+ selectiable only one
+  1,2,3,4,5,6,7.
+  
+Workout Duration
+Type: selectiable (only one option can be selected)
+Options:
+20 minutes
+30 minutes
+45 minutes
+60 minutes
+90 minutes
+120 minutes
+
+profile update 
+    1.replace logout options inside profile
+    2.remove streak option
+
+create food plan
+take data from user
+    1.age 
+    2.gender
+        1.Male
+        2.Female
+    3.height
+    4.weight
+    5.goal
+    drop down
+        1.Fat Loss
+        2.Muscle Gain
+    6.Mealtype
+    drop down
+        1.Breakfast
+        2.Lunch
+        3.Dinner 
+    7.veg/nonveg
+   type dropdown
+        1.veg
+        2.nonveg       
+        
+
+LOGIN PAGE: 
+ADDING FORGOT PASSWORD
+
+ADDING  :
+LOGIN WITH GOOGLE
+LOGIN WITH APPLE
+
+Password validation(rules for a password)
+
+Remove height , age and weight from signup page
+
+new PAGE 
+  BMI calculater
+    1.age
+    2.gender
+    3.height
+    4.weight
