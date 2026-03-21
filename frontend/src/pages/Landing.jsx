@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import PageReveal from '../components/PageReveal';
-import ScrollReveal from '../components/ScrollReveal';
 import './Landing.css';
 
 export default function Landing() {
@@ -32,19 +31,6 @@ export default function Landing() {
                 </div>
             </section>
 
-            <section className="scroll-quote-section" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '100px 20px', textAlign: 'center' }}>
-                <ScrollReveal
-                    baseOpacity={0.1}
-                    enableBlur
-                    baseRotation={3}
-                    blurStrength={4}
-                >
-                    When does a man die? When he is hit by a bullet? No! When he suffers a disease?
-                    No! When he ate a soup made out of a poisonous mushroom?
-                    No! A man dies when he is forgotten!
-                </ScrollReveal>
-            </section>
-
             <section className="landing-features">
                 <div className="glass-card feature-card">
                     <div className="feature-icon green">💪</div>
@@ -54,8 +40,8 @@ export default function Landing() {
 
                 <div className="glass-card feature-card">
                     <div className="feature-icon red">📷</div>
-                    <h3>Live Posture Check</h3>
-                    <p>Real-time form correction using MediaPipe during your exercises.</p>
+                    <h3>food recommendations</h3>
+                    <p>AI Powered Food Recommendations based on your goals and body stats.</p>
                 </div>
 
                 <div className="glass-card feature-card">
@@ -66,8 +52,8 @@ export default function Landing() {
 
                 <div className="glass-card feature-card">
                     <div className="feature-icon purple">⚡</div>
-                    <h3>Streak System</h3>
-                    <p>Stay consistent with daily workout streaks and progress tracking.</p>
+                    <h3>BMI calculator</h3>
+                    <p>Calculate your BMI based on your Age ,weight and height.</p>
                 </div>
             </section>
         </PageReveal>

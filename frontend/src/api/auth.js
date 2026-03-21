@@ -99,11 +99,11 @@ const DEMO_MEAL_SUMMARY = {
 
 // ---- Auth ----
 
-export async function signupUser(/* { name, email, password, height, weight, goal } */) {
+export async function signupUser(/* { name, email, password} */) {
     // const res = await fetch(`${API_BASE}/signup`, {
     //     method: 'POST',
     //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ name, email, password, height, weight, goal }),
+    //     body: JSON.stringify({ name, email, password}),
     // });
     // const data = await res.json();
     // if (!res.ok) throw new Error(data.detail || 'Signup failed');

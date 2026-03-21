@@ -4,7 +4,7 @@ import { logWorkout, generateWorkoutPlan } from '../api/auth';
 import PageReveal from '../components/PageReveal';
 import './Workout.css';
 
-const TABS = ['Live Posture', 'Suggested Plan', 'Log Workout'];
+const TABS = ['Suggested Plan', 'Log Workout'];
 
 const EQUIPMENT_OPTIONS = [
     'No Equipment',
@@ -90,8 +90,6 @@ export default function Workout() {
     const [logMsg, setLogMsg] = useState('');
     const [logError, setLogError] = useState('');
 
-    // Posture state
-    const [cameraActive, setCameraActive] = useState(false);
 
     // -- Wizard helpers --
     const currentStep = WIZARD_STEPS[wizardStep];
@@ -189,30 +187,6 @@ export default function Workout() {
         }
     };
 
-    // -- Posture handler --
-    const handleStartCamera = async () => {
-        setCameraActive(true);
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            const video = document.getElementById('posture-video');
-            if (video) {
-                video.srcObject = stream;
-                video.play();
-            }
-        } catch (err) {
-            setCameraActive(false);
-            alert('Camera access denied. Please allow camera permissions.');
-        }
-    };
-
-    const handleStopCamera = () => {
-        const video = document.getElementById('posture-video');
-        if (video && video.srcObject) {
-            video.srcObject.getTracks().forEach(t => t.stop());
-            video.srcObject = null;
-        }
-        setCameraActive(false);
-    };
 
     // -- Render wizard step content --
     const renderWizardContent = () => {
@@ -353,7 +327,7 @@ export default function Workout() {
     return (
         <PageReveal className="workout-page">
             <h1>Workout</h1>
-            <p className="subtitle">Track exercises and check your form in real-time</p>
+            <p className="subtitle">Track exercises and log your progress</p>
 
             <div className="workout-tabs">
                 {TABS.map((tab) => (
@@ -486,37 +460,6 @@ export default function Workout() {
                     </div>
                 )}
 
-                {/* ========== LIVE POSTURE ========== */}
-                {activeTab === 'Live Posture' && (
-                    <div className="glass-card posture-card">
-                        {!cameraActive ? (
-                            <>
-                                <div className="cam-placeholder">
-                                    <span className="cam-icon">📷</span>
-                                    <p>Camera feed will appear here</p>
-                                    <p style={{ fontSize: 'var(--font-xs)', color: 'var(--text-muted)' }}>
-                                        Uses MediaPipe for real-time pose detection
-                                    </p>
-                                </div>
-                                <button className="btn-primary" onClick={handleStartCamera}>
-                                    Start Posture Check
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <div className="posture-video-wrapper">
-                                    <video id="posture-video" className="posture-video" autoPlay playsInline muted />
-                                    <div className="posture-overlay">
-                                        <span className="posture-status live">🔴 LIVE</span>
-                                    </div>
-                                </div>
-                                <button className="btn-secondary" onClick={handleStopCamera} style={{ marginTop: 'var(--space-md)' }}>
-                                    Stop Camera
-                                </button>
-                            </>
-                        )}
-                    </div>
-                )}
 
                 {/* ========== LOG WORKOUT ========== */}
                 {activeTab === 'Log Workout' && (

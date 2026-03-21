@@ -563,70 +563,7 @@
     font-weight: 500;
 }
 
-/* ---- Live Posture ---- */
-.posture-card {
-    padding: var(--space-xl);
-    text-align: center;
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
-.cam-placeholder {
-    width: 100%;
-    max-width: 480px;
-    height: 280px;
-    border: 2px dashed var(--border);
-    border-radius: var(--radius-md);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-}
-
-.cam-placeholder .cam-icon {
-    font-size: 2.5rem;
-    opacity: 0.4;
-}
-
-.posture-video-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 560px;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    border: 1px solid var(--border-accent);
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
-}
-
-.posture-video {
-    width: 100%;
-    height: auto;
-    display: block;
-    background: #000;
-    min-height: 300px;
-}
-
-.posture-overlay {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-}
-
-.posture-status.live {
-    background: rgba(239, 68, 68, 0.85);
-    color: #fff;
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-    font-size: var(--font-xs);
-    font-weight: 600;
-    animation: pulse-glow 2s infinite;
-}
 
 /* ---- Log Workout ---- */
 .log-workout-card {
