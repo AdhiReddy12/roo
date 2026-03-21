@@ -1,0 +1,46 @@
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
+
+const Landing = lazy(() => import('./pages/Landing'));
+const Login = lazy(() => import('./pages/Login'));
+const Signup = lazy(() => import('./pages/Signup'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Workout = lazy(() => import('./pages/Workout'));
+const FoodPlan = lazy(() => import('./pages/FoodPlan'));
+const Profile = lazy(() => import('./pages/Profile'));
+const BMICalculator = lazy(() => import('./pages/BMICalculator'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+export default function App() {
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <div className="app-container">
+                    <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>Loading...</div>}>
+                        <Routes>
+                            {/* Public routes */}
+                            <Route path="/" element={<Landing />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<Signup />} />
+
+                            {/* Protected routes with navbar layout */}
+                            <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+                                <Route path="/dashboard" element={<Dashboard />} />
+                                <Route path="/workout" element={<Workout />} />
+                                <Route path="/food-plan" element={<FoodPlan />} />
+                                <Route path="/bmi" element={<BMICalculator />} />
+                                <Route path="/profile" element={<Profile />} />
+                            </Route>
+
+                            {/* 404 */}
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </Suspense>
+                </div>
+            </BrowserRouter>
+        </AuthProvider>
+    );
+}
