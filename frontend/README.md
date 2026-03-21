@@ -46,23 +46,6 @@ Iron-Pulse/
 │
 └── README.md
 ```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- **Node.js** ≥ 18
-- **Python** ≥ 3.10
-- **MongoDB** running locally on `mongodb://localhost:27017`
-
-### Backend Setup
-```bash
-cd backend
-pip install -r requirements.txt
-python -m uvicorn main:app --reload --port 8000
-```
-
 ### Frontend Setup
 ```bash
 cd frontend
@@ -108,31 +91,20 @@ Open **http://localhost:5173/** in your browser.
 - **💪 Smart Workout Plans** — personalized exercises based on goal (4 databases: Lose Weight, Build Muscle, Stay Fit, Gain Weight)
 - **📷 Live Posture Check** — webcam feed with MediaPipe integration hooks
 - **🍽️ Food Tracking** — search 20+ foods, one-click logging, macro progress bars
+- **🔥 Streak System** — consecutive workout day tracking
 - **🌙 Premium Dark Theme** — glassmorphism, emerald accents, micro-animations
 
 ---
 
-## 👥 Team
-
-| Role | Responsibility |
-|------|---------------|
-| Frontend Developer | React UI, routing, state management, Recharts |
-| Backend Developer | FastAPI APIs, MongoDB, authentication, streak logic |
-| ML Engineer 1 | MediaPipe posture detection, webcam integration |
-| ML Engineer 2 | Food recognition, workout recommendation engine |
-
----
-
-## 📄 License
 
 This project was created as a B.Tech final year submission.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 create plan update 
     remove unnassary option option in equipment and add gym plan
 
-Add option to add his workout (leave it for now)
-
-
+Add option to add his workout
+    
 goal
     1.Fat Loss
     2.Muscle Gain
@@ -169,11 +141,10 @@ Options:
 90 minutes
 120 minutes
 
-----------------------------------------------------------------------
 profile update 
     1.replace logout options inside profile
     2.remove streak option
---------------------------------------------------------------------------------------------------------------------
+
 create food plan
 take data from user
     1.age 
@@ -208,28 +179,9 @@ Password validation(rules for a password)
 
 Remove height , age and weight from signup page
 
-
-
 new PAGE 
   BMI calculater
     1.age
     2.gender
     3.height
     4.weight
-
-
-
-<---------------------------------------------------------------------------------------------->
-able to directly add food from the food search page and from recommended food plan page
-
-<---------------------------------------------------------------------------------------------->
-able add workout he completed form recommended workout plan page
-
-remove live posture and log workout 
-and add a new option calories burned prediction 
-        in that take 3 inputs
-            1.workout type (dropdown (strenth or cardio))
-            2.duration(take input)
-            3.age(take input)
-            4.weight(take input)
-            5.gender(dropdown (male or female))

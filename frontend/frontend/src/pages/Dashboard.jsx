@@ -5,7 +5,6 @@ import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
     ResponsiveContainer,
 } from 'recharts';
-import PageReveal from '../components/PageReveal';
 import './Dashboard.css';
 
 function getGreeting() {
@@ -42,17 +41,17 @@ export default function Dashboard() {
 
     if (loading) {
         return (
-            <PageReveal className="dashboard">
+            <div className="dashboard">
                 <div className="loading-state">
                     <div className="spinner" />
                     <p>Loading your dashboard...</p>
                 </div>
-            </PageReveal>
+            </div>
         );
     }
 
     return (
-        <PageReveal className="dashboard">
+        <div className="dashboard">
             <div className="dashboard-greeting">
                 <h1>{getGreeting()}, <span className="name">{name}</span></h1>
                 <p className="streak-msg">💪 Let's crush today's goals!</p>
@@ -96,6 +95,6 @@ export default function Dashboard() {
                     </ResponsiveContainer>
                 </div>
             </div>
-        </PageReveal>
+        </div>
     );
 }

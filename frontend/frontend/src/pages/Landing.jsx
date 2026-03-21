@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
-import PageReveal from '../components/PageReveal';
-import ScrollReveal from '../components/ScrollReveal';
 import './Landing.css';
 
 export default function Landing() {
     return (
-        <PageReveal className="landing">
+        <div className="landing">
             <section className="landing-hero">
                 <div className="hero-badge">
                     <span className="badge-icon">🔥</span>
@@ -30,19 +28,6 @@ export default function Landing() {
                         Log In
                     </Link>
                 </div>
-            </section>
-
-            <section className="scroll-quote-section" style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '100px 20px', textAlign: 'center' }}>
-                <ScrollReveal
-                    baseOpacity={0.1}
-                    enableBlur
-                    baseRotation={3}
-                    blurStrength={4}
-                >
-                    When does a man die? When he is hit by a bullet? No! When he suffers a disease?
-                    No! When he ate a soup made out of a poisonous mushroom?
-                    No! A man dies when he is forgotten!
-                </ScrollReveal>
             </section>
 
             <section className="landing-features">
@@ -70,6 +55,6 @@ export default function Landing() {
                     <p>Stay consistent with daily workout streaks and progress tracking.</p>
                 </div>
             </section>
-        </PageReveal>
+        </div>
     );
 }

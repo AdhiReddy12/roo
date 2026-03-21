@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signupUser } from '../api/auth';
-import PageReveal from '../components/PageReveal';
 import './Auth.css';
 
 export default function Signup() {
@@ -48,7 +47,7 @@ export default function Signup() {
     };
 
     return (
-        <PageReveal className="auth-page">
+        <div className="auth-page">
             <div className="auth-header">
                 <div className="auth-icon">🔥</div>
                 <h1>Start Your Journey</h1>
@@ -121,6 +120,6 @@ export default function Signup() {
                     Already have an account? <Link to="/login">Log In</Link>
                 </p>
             </form>
-        </PageReveal>
+        </div>
     );
 }

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { searchFoods, logMeal, fetchMeals, fetchMealSummary, generateFoodPlan } from '../api/auth';
-import PageReveal from '../components/PageReveal';
 import './FoodPlan.css';
 
 const FOOD_WIZARD_STEPS = [
@@ -263,7 +262,7 @@ export default function FoodPlan() {
     const fat = macros?.fats || { current: 0, target: 70 };
 
     return (
-        <PageReveal className="food-plan-page">
+        <div className="food-plan-page">
             <h1>Food Plan</h1>
             <p className="subtitle">Track your daily nutrition and macros</p>
 
@@ -476,6 +475,6 @@ export default function FoodPlan() {
                     </div>
                 )}
             </div>
-        </PageReveal>
+        </div>
     );
 }

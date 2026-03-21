@@ -1,7 +1,9 @@
-/* 
+/* ================================================================
    Iron Pulse — Global Design System
-*/
+   Dark theme with emerald green accent, glassmorphism cards
+   ================================================================ */
 
+/* ---------- CSS Custom Properties ---------- */
 :root {
   /* Background */
   --bg-primary: #0a0a0f;

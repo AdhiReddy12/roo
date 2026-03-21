@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PageReveal from '../components/PageReveal';
 import './BMICalculator.css';
 
 const BMI_CATEGORIES = [
@@ -41,7 +40,7 @@ export default function BMICalculator() {
     const gaugePercent = result ? Math.min(Math.max(((parseFloat(result.bmi) - 10) / 30) * 100, 0), 100) : 0;
 
     return (
-        <PageReveal className="bmi-page">
+        <div className="bmi-page">
             <h1>BMI Calculator</h1>
             <p className="subtitle">Calculate your Body Mass Index</p>
 
@@ -159,6 +158,6 @@ export default function BMICalculator() {
                     )}
                 </div>
             </div>
-        </PageReveal>
+        </div>
     );
 }

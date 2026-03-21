@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { logWorkout, generateWorkoutPlan } from '../api/auth';
-import PageReveal from '../components/PageReveal';
 import './Workout.css';
 
 const TABS = ['Live Posture', 'Suggested Plan', 'Log Workout'];
@@ -351,7 +350,7 @@ export default function Workout() {
     };
 
     return (
-        <PageReveal className="workout-page">
+        <div className="workout-page">
             <h1>Workout</h1>
             <p className="subtitle">Track exercises and check your form in real-time</p>
 
@@ -567,6 +566,6 @@ export default function Workout() {
                     </div>
                 )}
             </div>
-        </PageReveal>
+        </div>
     );
 }

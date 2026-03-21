@@ -27,3 +27,13 @@ npm-debug.log*
 # Misc
 *.bak
 *.tmp
+
+# Python / FastAPI Backend
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env/
+.venv/
+*.sqlite3
