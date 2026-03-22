@@ -185,3 +185,30 @@ new PAGE
     2.gender
     3.height
     4.weight
+
+new option
+calories prediction 
+    1.age
+    2.gender
+    3.height
+    4.weight
+    5.body fat (option - ESTIMATIONALY ok)
+    6.EXERCISE TYPE 
+        1.Cycling
+        2.Elliptical
+        3.HIIT
+        4.Jump Rope
+        5.Rowing
+        6.Running
+        7.Swimming
+        8.Walking
+        9.Weight Training
+        10.Yoga
+WORKOUT DETAILS
+    Duration(minutes)
+    Heart Rate(bpm)
+    Intensity
+        1.Low   (hover when seelecting( user can SET HEART  RATE 100-120))
+        2.Medium (hover when seelecting( user can SET HEART  RATE 120-140))
+        3.High (hover when seelecting( user can SET HEART  RATE 140-160))
+    
