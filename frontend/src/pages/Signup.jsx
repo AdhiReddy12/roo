@@ -31,7 +31,7 @@ export default function Signup() {
         special: /[!@#$%^&*(),.?":{}|<>]/.test(pw),
         match: pw.length > 0 && pw === form.confirmPassword,
     };
-    const allValid = Object.values(checks).every(Boolean);
+    const allValid = Object.values(checks).every(Boolean) && form.securityAnswer.trim().length > 0;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -66,9 +66,10 @@ export default function Signup() {
         <div className="auth-page">
             <div className="auth-header">
                 <div className="auth-icon">🔥</div>
-                <h1>Start Your Journey</h1>
-                <p>Create an account to get personalized fitness plans</p>
+                <h1>Create Account</h1>
+                <p>Join thousands achieving their fitness goals</p>
             </div>
+
 
             <form className="glass-card auth-form" onSubmit={handleSubmit}>
                 {error && <div className="auth-error">{error}</div>}
@@ -137,28 +138,32 @@ export default function Signup() {
                     )}
                 </div>
 
-                <div className="input-group">
-                    <label htmlFor="signup-security-q">Security Question</label>
-                    <div className="input-field">
-                        <span className="icon">❓</span>
-                        <select id="signup-security-q" value={form.securityQuestion}
-                            onChange={update('securityQuestion')}
-                            style={{ background: 'transparent', border: 'none', color: 'inherit', width: '100%', outline: 'none', fontSize: 'inherit' }}>
-                            {SECURITY_QUESTIONS.map((q) => (
-                                <option key={q} value={q} style={{ background: '#1a1a2e' }}>{q}</option>
-                            ))}
-                        </select>
+
+                <div className="auth-row">
+                    <div className="input-group">
+                        <label htmlFor="signup-security-q">Security Question</label>
+                        <div className="input-field">
+                            <span className="icon">❓</span>
+                            <select id="signup-security-q" value={form.securityQuestion}
+                                onChange={update('securityQuestion')}
+                                style={{ background: 'transparent', border: 'none', color: 'inherit', width: '100%', outline: 'none', fontSize: 'inherit' }}>
+                                {SECURITY_QUESTIONS.map((q) => (
+                                    <option key={q} value={q} style={{ background: '#1a1a2e' }}>{q}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="input-group">
+                        <label htmlFor="signup-security-a">Security Answer</label>
+                        <div className="input-field">
+                            <span className="icon">🔑</span>
+                            <input id="signup-security-a" type="text" placeholder="Your answer"
+                                value={form.securityAnswer} onChange={update('securityAnswer')} required />
+                        </div>
                     </div>
                 </div>
 
-                <div className="input-group">
-                    <label htmlFor="signup-security-a">Security Answer</label>
-                    <div className="input-field">
-                        <span className="icon">🔑</span>
-                        <input id="signup-security-a" type="text" placeholder="Your answer"
-                            value={form.securityAnswer} onChange={update('securityAnswer')} required />
-                    </div>
-                </div>
 
                 <button className="auth-submit" type="submit" disabled={loading || !allValid}>
                     {loading ? 'Creating…' : 'Create Account'} <span>→</span>

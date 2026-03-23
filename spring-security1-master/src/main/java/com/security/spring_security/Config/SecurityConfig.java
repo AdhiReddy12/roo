@@ -3,6 +3,7 @@ package com.security.spring_security.Config;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +28,9 @@ public class SecurityConfig {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Value("${app.oauth2.enabled:false}")
+    private boolean oauth2Enabled;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -57,29 +61,31 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
-                .cors(Customizer.withDefaults())
-                .csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(request -> request
-                    .requestMatchers("/register", "/login", "/forgot-password/**", "/csrf-token", "/error", "/oauth2/**", "/login/oauth2/**").permitAll()
-                        .requestMatchers("/**.html", "/**.css", "/**.js").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .authenticationProvider(authProvider())
-                .oauth2Login(oauth -> oauth
-                        .defaultSuccessUrl("http://localhost:5173/dashboard", true)
-                )
-                .httpBasic(basic -> basic
-                        .authenticationEntryPoint((request, response, authException) -> {
-                            response.setContentType("application/json");
-                            response.setStatus(401);
-                            response.getWriter().write("{\"error\": \"Unauthorized\"}");
-                        })
-                )
-                .sessionManagement(session ->
-                    session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                );
+            .cors(Customizer.withDefaults())
+            .csrf(customizer -> customizer.disable())
+            .authorizeHttpRequests(request -> request
+                .requestMatchers("/register", "/login", "/api/register", "/api/login", "/forgot-password/**", "/csrf-token", "/error").permitAll()
+                .requestMatchers("/api/calorie-predictions/**", "/api/foods/**").permitAll()
+                .requestMatchers("/**.html", "/**.css", "/**.js").permitAll()
+                .anyRequest().authenticated()
+            )
+            .authenticationProvider(authProvider())
+            .httpBasic(basic -> basic
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.setContentType("application/json");
+                    response.setStatus(401);
+                    response.getWriter().write("{\"error\": \"Unauthorized\"}");
+                })
+            )
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+            );
+
+        // Keep OAuth login opt-in so startup does not fail when client registrations are missing.
+        if (oauth2Enabled) {
+            http.oauth2Login(oauth -> oauth.defaultSuccessUrl("http://localhost:5173/dashboard", true));
+        }
 
         return http.build();
     }
@@ -89,3 +95,4 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 }
+

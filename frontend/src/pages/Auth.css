@@ -46,6 +46,21 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
+    margin-bottom: var(--space-md) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+@media (min-width: 480px) {
+    .auth-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 600px) {
+    .auth-row {
+        grid-template-columns: 2fr 1fr;
+    }
 }
 
 .auth-submit {
@@ -212,8 +227,19 @@
     box-shadow: 0 2px 12px rgba(255, 255, 255, 0.1);
 }
 
-@media (max-width: 500px) {
-    .auth-row {
-        grid-template-columns: 1fr;
-    }
+/* Security fields - simple fix */
+.auth-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: var(--space-md) !important;
+    margin-bottom: var(--space-md) !important;
+}
+
+.auth-row .input-group {
+    display: block !important;
+}
+
+#signup-security-q,
+#signup-security-a {
+    display: block !important;
 }

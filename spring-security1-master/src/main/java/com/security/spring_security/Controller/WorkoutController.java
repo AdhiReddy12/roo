@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @RestController
-@RequestMapping("/workouts")
+@RequestMapping("/api/workouts")
 public class WorkoutController {
 
     @Autowired

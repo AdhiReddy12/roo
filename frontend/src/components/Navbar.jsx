@@ -22,6 +22,10 @@ export default function Navbar() {
                     <span className="nav-icon">🍽️</span>
                     <span>Food Plan</span>
                 </NavLink>
+                <NavLink to="/calorie-predictor" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+                    <span className="nav-icon">🔮</span>
+                    <span>Calorie AI</span>
+                </NavLink>
                 <NavLink to="/bmi" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                     <span className="nav-icon">⚖️</span>
                     <span>BMI</span>

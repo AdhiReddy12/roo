@@ -11,6 +11,7 @@ import Workout from './pages/Workout';
 import FoodPlan from './pages/FoodPlan';
 import Profile from './pages/Profile';
 import BMICalculator from './pages/BMICalculator';
+import CaloriePredictor from './pages/CaloriePredictor';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
                         <Route path="/workout" element={<Workout />} />
                         <Route path="/food-plan" element={<FoodPlan />} />
                         <Route path="/bmi" element={<BMICalculator />} />
+                        <Route path="/calorie-predictor" element={<CaloriePredictor />} />
                         <Route path="/profile" element={<Profile />} />
                     </Route>
 

@@ -22,7 +22,12 @@ export async function signupUser({ username, email, password, age, securityQuest
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password, age: parseInt(age), securityQuestion, securityAnswer }),
     });
-    const data = await res.json();
+    let data;
+    try {
+        data = await res.json();
+    } catch {
+        throw new Error('Server error — please try again later.');
+    }
     if (!res.ok) throw new Error(data.message || 'Signup failed');
     return data;
 }
@@ -35,7 +40,12 @@ export async function loginUser({ email, password }) {
         },
         body: JSON.stringify({ email, password }),
     });
-    const data = await res.json();
+    let data;
+    try {
+        data = await res.json();
+    } catch {
+        throw new Error('Server error — please try again later.');
+    }
     if (!res.ok) throw new Error(data.message || 'Login failed');
     const credentials = btoa(`${email}:${password}`);
     return { credentials, user: data };
@@ -48,7 +58,12 @@ export async function fetchProfile(credentials) {
     if (!res.ok) {
         throw new Error('Failed to fetch profile');
     }
-    const data = await res.json();
+    let data;
+    try {
+        data = await res.json();
+    } catch {
+        throw new Error('Failed to parse profile data');
+    }
     return data;
 }
 
@@ -256,4 +271,64 @@ export async function generateFoodPlan(credentials, { age, gender, height, weigh
         total_protein: totalProtein,
         total_fats: totalFats,
     };
+}
+
+// ---- Calorie Burn Prediction (ML Model) ----
+
+export async function predictCalories({ age, gender, weight_kg, height_cm, body_fat_pct, exercise_type, duration_min, heart_rate, intensity }) {
+    const res = await fetch(`${API_BASE}/calorie-predictions/predict`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ age, gender, weight_kg, height_cm, body_fat_pct, exercise_type, duration_min, heart_rate, intensity }),
+    });
+    const data = await res.json();
+    if (!data.success) {
+        // Handle different error types with specific messages
+        let errorMessage = data.message || 'Prediction failed';
+        
+        switch (data.errorType) {
+            case 'VALIDATION_ERROR':
+                errorMessage = `Invalid input: ${data.message}`;
+                break;
+            case 'ML_SERVICE_UNAVAILABLE':
+                errorMessage = 'ML service is temporarily unavailable. Please try again later.';
+                break;
+            case 'NETWORK_ERROR':
+                errorMessage = 'Network connection issue. Please check your internet and try again.';
+                break;
+            case 'TIMEOUT_ERROR':
+                errorMessage = 'Request timed out. Please try again.';
+                break;
+            case 'ML_SERVICE_ERROR':
+                errorMessage = 'ML service error. Please try again later.';
+                break;
+            default:
+                errorMessage = data.message || 'An unexpected error occurred. Please try again.';
+        }
+        
+        throw new Error(errorMessage);
+    }
+    return data.data;
+}
+
+export async function saveCaloriePrediction(credentials, predictionData) {
+    const res = await fetch(`${API_BASE}/calorie-predictions`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            ...getAuthHeader(credentials),
+        },
+        body: JSON.stringify(predictionData),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Failed to save prediction');
+    return data;
+}
+
+export async function fetchCaloriePredictions(credentials) {
+    const res = await fetch(`${API_BASE}/calorie-predictions`, {
+        headers: { ...getAuthHeader(credentials) },
+    });
+    if (!res.ok) throw new Error('Failed to fetch predictions');
+    return await res.json();
 }
