@@ -65,7 +65,7 @@ export default function Signup() {
     return (
         <div className="auth-page">
             <div className="auth-header">
-                <div className="auth-icon">🔥</div>
+                <div className="auth-icon"></div>
                 <h1>Create Account</h1>
                 <p>Join thousands achieving their fitness goals</p>
             </div>
@@ -86,7 +86,7 @@ export default function Signup() {
                 <div className="input-group">
                     <label htmlFor="signup-email">Email</label>
                     <div className="input-field">
-                        <span className="icon">✉</span>
+                        <span className="icon"></span>
                         <input id="signup-email" type="email" placeholder="you@example.com"
                             value={form.email} onChange={update('email')} required />
                     </div>
@@ -95,7 +95,7 @@ export default function Signup() {
                 <div className="input-group">
                     <label htmlFor="signup-age">Age</label>
                     <div className="input-field">
-                        <span className="icon">🎂</span>
+                        <span className="icon"></span>
                         <input id="signup-age" type="number" placeholder="25" min="10" max="120"
                             value={form.age} onChange={update('age')} required />
                     </div>
@@ -104,7 +104,7 @@ export default function Signup() {
                 <div className="input-group">
                     <label htmlFor="signup-password">Password</label>
                     <div className="input-field">
-                        <span className="icon">🔒</span>
+                        <span className="icon"></span>
                         <input id="signup-password" type="password" placeholder="••••••••"
                             value={form.password} onChange={update('password')} required />
                     </div>
@@ -129,7 +129,7 @@ export default function Signup() {
                 <div className="input-group">
                     <label htmlFor="signup-confirm">Confirm Password</label>
                     <div className="input-field">
-                        <span className="icon">🔒</span>
+                        <span className="icon"></span>
                         <input id="signup-confirm" type="password" placeholder="••••••••"
                             value={form.confirmPassword} onChange={update('confirmPassword')} required />
                     </div>
@@ -143,7 +143,7 @@ export default function Signup() {
                     <div className="input-group">
                         <label htmlFor="signup-security-q">Security Question</label>
                         <div className="input-field">
-                            <span className="icon">❓</span>
+                            <span className="icon"></span>
                             <select id="signup-security-q" value={form.securityQuestion}
                                 onChange={update('securityQuestion')}
                                 style={{ background: 'transparent', border: 'none', color: 'inherit', width: '100%', outline: 'none', fontSize: 'inherit' }}>
@@ -157,7 +157,7 @@ export default function Signup() {
                     <div className="input-group">
                         <label htmlFor="signup-security-a">Security Answer</label>
                         <div className="input-field">
-                            <span className="icon">🔑</span>
+                            <span className="icon"></span>
                             <input id="signup-security-a" type="text" placeholder="Your answer"
                                 value={form.securityAnswer} onChange={update('securityAnswer')} required />
                         </div>

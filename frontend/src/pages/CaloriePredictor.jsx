@@ -4,28 +4,28 @@ import { predictCalories, saveCaloriePrediction, fetchCaloriePredictions } from 
 import './CaloriePredictor.css';
 
 const EXERCISE_TYPES = [
-    { value: 'Running', emoji: '🏃', label: 'Running' },
-    { value: 'Cycling', emoji: '🚴', label: 'Cycling' },
-    { value: 'Swimming', emoji: '🏊', label: 'Swimming' },
-    { value: 'Walking', emoji: '🚶', label: 'Walking' },
-    { value: 'HIIT', emoji: '⚡', label: 'HIIT' },
-    { value: 'Weight Training', emoji: '🏋️', label: 'Weights' },
-    { value: 'Yoga', emoji: '🧘', label: 'Yoga' },
-    { value: 'Jump Rope', emoji: '🤸', label: 'Jump Rope' },
-    { value: 'Rowing', emoji: '🚣', label: 'Rowing' },
-    { value: 'Elliptical', emoji: '🔄', label: 'Elliptical' },
+    { value: 'Running', emoji: '', label: 'Running' },
+    { value: 'Cycling', emoji: '', label: 'Cycling' },
+    { value: 'Swimming', emoji: '', label: 'Swimming' },
+    { value: 'Walking', emoji: '', label: 'Walking' },
+    { value: 'HIIT', emoji: '', label: 'HIIT' },
+    { value: 'Weight Training', emoji: '️', label: 'Weights' },
+    { value: 'Yoga', emoji: '', label: 'Yoga' },
+    { value: 'Jump Rope', emoji: '', label: 'Jump Rope' },
+    { value: 'Rowing', emoji: '', label: 'Rowing' },
+    { value: 'Elliptical', emoji: '', label: 'Elliptical' },
 ];
 
 const INTENSITY_OPTIONS = [
-    { value: 1, label: '🟢 Low', className: 'low' },
-    { value: 2, label: '🟡 Medium', className: 'medium' },
-    { value: 3, label: '🔴 High', className: 'high' },
+    { value: 1, label: ' Low', className: 'low' },
+    { value: 2, label: ' Medium', className: 'medium' },
+    { value: 3, label: ' High', className: 'high' },
 ];
 
 const EXERCISE_EMOJI_MAP = {
-    'Running': '🏃', 'Cycling': '🚴', 'Swimming': '🏊', 'Walking': '🚶',
-    'HIIT': '⚡', 'Weight Training': '🏋️', 'Yoga': '🧘', 'Jump Rope': '🤸',
-    'Rowing': '🚣', 'Elliptical': '🔄',
+    'Running': '', 'Cycling': '', 'Swimming': '', 'Walking': '',
+    'HIIT': '', 'Weight Training': '️', 'Yoga': '', 'Jump Rope': '',
+    'Rowing': '', 'Elliptical': '',
 };
 
 const INTENSITY_LABEL = { 1: 'Low', 2: 'Medium', 3: 'High' };
@@ -108,7 +108,7 @@ export default function CaloriePredictor() {
                 met_value: result.met_value,
                 date: new Date().toISOString().split('T')[0],
             });
-            setSaveMsg('Prediction saved! 🎉');
+            setSaveMsg('Prediction saved! ');
             // Refresh history
             const updated = await fetchCaloriePredictions(token);
             setHistory(updated);
@@ -136,7 +136,7 @@ export default function CaloriePredictor() {
             {/* ========== RESULTS ========== */}
             {result && (
                 <div className="glass-card results-card">
-                    <h3>🎯 Prediction Results</h3>
+                    <h3> Prediction Results</h3>
 
                     <div className="results-hero">
                         <div className="hero-value">{result.calories_burned?.toFixed(1)}</div>
@@ -160,7 +160,7 @@ export default function CaloriePredictor() {
 
                     {result.food_equivalents && result.food_equivalents.length > 0 && (
                         <div className="food-equivalents">
-                            <h4>🍽️ That's equivalent to…</h4>
+                            <h4>️ That's equivalent to…</h4>
                             <div className="food-grid">
                                 {result.food_equivalents.map((food, i) => (
                                     <div key={i} className="food-item">
@@ -175,10 +175,10 @@ export default function CaloriePredictor() {
 
                     <div className="result-actions">
                         <button className="save-btn" onClick={handleSave} disabled={saving}>
-                            {saving ? '⏳ Saving…' : '💾 Save Prediction'}
+                            {saving ? ' Saving…' : ' Save Prediction'}
                         </button>
                         <button className="reset-btn" onClick={handleReset}>
-                            🔄 New Prediction
+                             New Prediction
                         </button>
                     </div>
                 </div>
@@ -187,7 +187,7 @@ export default function CaloriePredictor() {
             {/* ========== FORM ========== */}
             {!result && (
                 <form className="glass-card predictor-form-card" onSubmit={handlePredict}>
-                    <h3>🔮 Enter Your Details</h3>
+                    <h3> Enter Your Details</h3>
 
                     {loading ? (
                         <div className="predictor-loading">
@@ -200,7 +200,7 @@ export default function CaloriePredictor() {
                             <div className="input-group">
                                 <label>Age</label>
                                 <div className="input-field">
-                                    <span className="icon">🎂</span>
+                                    <span className="icon"></span>
                                     <input type="number" placeholder="25" value={form.age}
                                         onChange={(e) => updateField('age', e.target.value)} min="1" max="100" required />
                                 </div>
@@ -211,9 +211,9 @@ export default function CaloriePredictor() {
                                 <label>Gender</label>
                                 <div className="gender-toggle">
                                     <button type="button" className={`gender-btn ${form.gender === 0 ? 'selected' : ''}`}
-                                        onClick={() => updateField('gender', 0)}>♀️ Female</button>
+                                        onClick={() => updateField('gender', 0)}>️ Female</button>
                                     <button type="button" className={`gender-btn ${form.gender === 1 ? 'selected' : ''}`}
-                                        onClick={() => updateField('gender', 1)}>♂️ Male</button>
+                                        onClick={() => updateField('gender', 1)}>️ Male</button>
                                 </div>
                             </div>
 
@@ -221,7 +221,7 @@ export default function CaloriePredictor() {
                             <div className="input-group">
                                 <label>Weight (kg)</label>
                                 <div className="input-field">
-                                    <span className="icon">⚖️</span>
+                                    <span className="icon">️</span>
                                     <input type="number" placeholder="70" value={form.weight_kg}
                                         onChange={(e) => updateField('weight_kg', e.target.value)} min="1" required />
                                 </div>
@@ -231,7 +231,7 @@ export default function CaloriePredictor() {
                             <div className="input-group">
                                 <label>Height (cm)</label>
                                 <div className="input-field">
-                                    <span className="icon">📏</span>
+                                    <span className="icon"></span>
                                     <input type="number" placeholder="170" value={form.height_cm}
                                         onChange={(e) => updateField('height_cm', e.target.value)} min="1" required />
                                 </div>
@@ -241,7 +241,7 @@ export default function CaloriePredictor() {
                             <div className="input-group">
                                 <label>Body Fat % (optional)</label>
                                 <div className="input-field">
-                                    <span className="icon">📊</span>
+                                    <span className="icon"></span>
                                     <input type="number" placeholder="20" value={form.body_fat_pct}
                                         onChange={(e) => updateField('body_fat_pct', e.target.value)} min="1" max="60" />
                                 </div>
@@ -251,7 +251,7 @@ export default function CaloriePredictor() {
                             <div className="input-group">
                                 <label>Duration (min)</label>
                                 <div className="input-field">
-                                    <span className="icon">⏱️</span>
+                                    <span className="icon">️</span>
                                     <input type="number" placeholder="30" value={form.duration_min}
                                         onChange={(e) => updateField('duration_min', e.target.value)} min="1" required />
                                 </div>
@@ -261,7 +261,7 @@ export default function CaloriePredictor() {
                             <div className="input-group">
                                 <label>Heart Rate (BPM)</label>
                                 <div className="input-field">
-                                    <span className="icon">❤️</span>
+                                    <span className="icon">️</span>
                                     <input type="number" placeholder="120" value={form.heart_rate}
                                         onChange={(e) => updateField('heart_rate', e.target.value)} min="40" max="220" required />
                                 </div>
@@ -299,7 +299,7 @@ export default function CaloriePredictor() {
                             {/* Submit */}
                             <div className="predict-btn-wrap">
                                 <button className="predict-btn" type="submit" disabled={!canSubmit || loading}>
-                                    {loading ? '⏳ Predicting…' : '🚀 Predict Calories Burned'}
+                                    {loading ? ' Predicting…' : ' Predict Calories Burned'}
                                 </button>
                             </div>
                         </div>
@@ -309,7 +309,7 @@ export default function CaloriePredictor() {
 
             {/* ========== HISTORY ========== */}
             <div className="glass-card history-card">
-                <h3>📋 Prediction History</h3>
+                <h3> Prediction History</h3>
 
                 {historyLoading ? (
                     <div className="predictor-loading">
@@ -318,7 +318,7 @@ export default function CaloriePredictor() {
                     </div>
                 ) : history.length === 0 ? (
                     <div className="history-empty">
-                        <div className="empty-icon">📊</div>
+                        <div className="empty-icon"></div>
                         <p>No predictions yet. Try your first one above!</p>
                     </div>
                 ) : (
@@ -327,15 +327,15 @@ export default function CaloriePredictor() {
                             <div key={item.id || i} className="history-item">
                                 <div className="history-left">
                                     <div className="history-exercise-icon">
-                                        {EXERCISE_EMOJI_MAP[item.exercise_type] || '🏃'}
+                                        {EXERCISE_EMOJI_MAP[item.exercise_type] || ''}
                                     </div>
                                     <div>
                                         <div className="history-exercise-name">{item.exercise_type}</div>
                                         <div className="history-exercise-meta">
-                                            <span>⏱ {item.duration_min} min</span>
-                                            <span>💓 {item.heart_rate} BPM</span>
-                                            <span>📊 {INTENSITY_LABEL[item.intensity] || 'Medium'}</span>
-                                            <span>📅 {item.date}</span>
+                                            <span> {item.duration_min} min</span>
+                                            <span> {item.heart_rate} BPM</span>
+                                            <span> {INTENSITY_LABEL[item.intensity] || 'Medium'}</span>
+                                            <span> {item.date}</span>
                                         </div>
                                     </div>
                                 </div>

@@ -2,11 +2,11 @@ import { useState } from 'react';
 import './BMICalculator.css';
 
 const BMI_CATEGORIES = [
-    { max: 18.5, label: 'Underweight', color: '#60a5fa', emoji: '🔵', advice: 'Consider a calorie-surplus diet with strength training.' },
-    { max: 24.9, label: 'Normal Weight', color: '#10b981', emoji: '🟢', advice: 'Great shape! Maintain with balanced nutrition and exercise.' },
-    { max: 29.9, label: 'Overweight', color: '#f59e0b', emoji: '🟡', advice: 'Consider adding more cardio and monitoring calorie intake.' },
-    { max: 34.9, label: 'Obese (Class I)', color: '#ef4444', emoji: '🟠', advice: 'Consult a healthcare provider and start a structured plan.' },
-    { max: Infinity, label: 'Obese (Class II+)', color: '#dc2626', emoji: '🔴', advice: 'Seek medical guidance for a safe weight-loss program.' },
+    { max: 18.5, label: 'Underweight', color: '#60a5fa', emoji: '', advice: 'Consider a calorie-surplus diet with strength training.' },
+    { max: 24.9, label: 'Normal Weight', color: '#10b981', emoji: '', advice: 'Great shape! Maintain with balanced nutrition and exercise.' },
+    { max: 29.9, label: 'Overweight', color: '#f59e0b', emoji: '', advice: 'Consider adding more cardio and monitoring calorie intake.' },
+    { max: 34.9, label: 'Obese (Class I)', color: '#ef4444', emoji: '', advice: 'Consult a healthcare provider and start a structured plan.' },
+    { max: Infinity, label: 'Obese (Class II+)', color: '#dc2626', emoji: '', advice: 'Seek medical guidance for a safe weight-loss program.' },
 ];
 
 function getCategory(bmi) {
@@ -47,12 +47,12 @@ export default function BMICalculator() {
             <div className="bmi-layout">
                 {/* Form Card */}
                 <div className="glass-card bmi-form-card">
-                    <h3>📊 Enter Your Details</h3>
+                    <h3> Enter Your Details</h3>
                     <form onSubmit={handleCalculate}>
                         <div className="input-group">
                             <label htmlFor="bmi-age">Age</label>
                             <div className="input-field">
-                                <span className="icon">🎂</span>
+                                <span className="icon"></span>
                                 <input id="bmi-age" type="number" placeholder="25"
                                     value={form.age} onChange={update('age')} min="1" max="120" required />
                                 <span className="bmi-unit">years</span>
@@ -74,7 +74,7 @@ export default function BMICalculator() {
                         <div className="input-group">
                             <label htmlFor="bmi-height">Height</label>
                             <div className="input-field">
-                                <span className="icon">📏</span>
+                                <span className="icon"></span>
                                 <input id="bmi-height" type="number" placeholder="175"
                                     value={form.height} onChange={update('height')} min="1" required />
                                 <span className="bmi-unit">cm</span>
@@ -84,7 +84,7 @@ export default function BMICalculator() {
                         <div className="input-group">
                             <label htmlFor="bmi-weight">Weight</label>
                             <div className="input-field">
-                                <span className="icon">⚖️</span>
+                                <span className="icon">️</span>
                                 <input id="bmi-weight" type="number" placeholder="70"
                                     value={form.weight} onChange={update('weight')} min="1" required />
                                 <span className="bmi-unit">kg</span>
@@ -108,7 +108,7 @@ export default function BMICalculator() {
                 <div className="glass-card bmi-result-card">
                     {!result ? (
                         <div className="bmi-empty">
-                            <div className="bmi-empty-icon">⚖️</div>
+                            <div className="bmi-empty-icon">️</div>
                             <p>Fill in your details and click <span className="accent">"Calculate BMI"</span> to see your result</p>
                         </div>
                     ) : (
@@ -137,7 +137,7 @@ export default function BMICalculator() {
                             </div>
 
                             <div className="bmi-advice">
-                                <h4>💡 Recommendation</h4>
+                                <h4> Recommendation</h4>
                                 <p>{result.advice}</p>
                             </div>
 

@@ -15,9 +15,10 @@ public class DataSeeder implements CommandLineRunner {
     private FoodRepo foodRepo;
 
     @Override
+    @SuppressWarnings("null")
     public void run(String... args) {
         if (foodRepo.count() == 0) {
-            foodRepo.saveAll(List.of(
+            List<Food> foods = List.of(
                 createFood("Chicken Breast", 165, 31, 3.6, "100g"),
                 createFood("Brown Rice", 216, 5, 1.8, "1 cup cooked"),
                 createFood("Banana", 105, 1.3, 0.4, "1 medium"),
@@ -33,7 +34,8 @@ public class DataSeeder implements CommandLineRunner {
                 createFood("Chapati", 120, 3.5, 3.7, "1 piece"),
                 createFood("Chicken Biryani", 350, 15, 12, "1 plate"),
                 createFood("Protein Shake", 180, 30, 3, "1 scoop + milk")
-            ));
+            );
+            foodRepo.saveAll(foods);
             System.out.println("✅ Seeded 15 foods into the database.");
         }
     }

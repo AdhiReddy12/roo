@@ -1,8 +1,4 @@
-// =============================================
-// API Layer — Connected to Spring Boot Backend
-// Backend runs on http://localhost:8080
-// Vite proxy forwards /api/** → http://localhost:8080
-// =============================================
+
 
 const API_BASE = '/api';
 export const SESSION_AUTH = 'session';
@@ -285,7 +281,7 @@ export async function predictCalories({ age, gender, weight_kg, height_cm, body_
     if (!data.success) {
         // Handle different error types with specific messages
         let errorMessage = data.message || 'Prediction failed';
-        
+
         switch (data.errorType) {
             case 'VALIDATION_ERROR':
                 errorMessage = `Invalid input: ${data.message}`;
@@ -305,7 +301,7 @@ export async function predictCalories({ age, gender, weight_kg, height_cm, body_
             default:
                 errorMessage = data.message || 'An unexpected error occurred. Please try again.';
         }
-        
+
         throw new Error(errorMessage);
     }
     return data.data;

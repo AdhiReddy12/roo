@@ -164,7 +164,7 @@ export default function Profile() {
                             </div>
                         </div>
                         <button className="profile-edit-btn" onClick={openEdit}>
-                            ✏️ Edit Profile
+                            ️ Edit Profile
                         </button>
                     </>
                 )}
@@ -186,7 +186,7 @@ export default function Profile() {
                         {workouts.slice(0, 10).map((w) => (
                             <div key={w.id} className="history-item">
                                 <div className="history-left">
-                                    <div className="history-icon">💪</div>
+                                    <div className="history-icon"></div>
                                     <div>
                                         <div className="history-name">{w.workout_name}</div>
                                         <div className="history-date">{w.date}</div>
@@ -204,7 +204,7 @@ export default function Profile() {
 
             {/* Logout Button */}
             <button className="profile-logout-btn" onClick={handleLogout}>
-                <span>↪</span> Logout
+                <span></span> Logout
             </button>
         </div>
     );

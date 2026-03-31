@@ -34,7 +34,7 @@ export default function Login() {
     return (
         <div className="auth-page">
             <div className="auth-header">
-                <div className="auth-icon">🔥</div>
+                <div className="auth-icon"></div>
                 <h1>Welcome Back</h1>
                 <p>Log in to continue your fitness journey</p>
             </div>
@@ -45,7 +45,7 @@ export default function Login() {
                 <div className="input-group">
                     <label htmlFor="login-email">Email</label>
                     <div className="input-field">
-                        <span className="icon">✉</span>
+                        <span className="icon"></span>
                         <input
                             id="login-email"
                             type="email"
@@ -60,7 +60,7 @@ export default function Login() {
                 <div className="input-group">
                     <label htmlFor="login-password">Password</label>
                     <div className="input-field">
-                        <span className="icon">🔒</span>
+                        <span className="icon"></span>
                         <input
                             id="login-password"
                             type="password"

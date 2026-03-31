@@ -54,22 +54,22 @@ export default function Dashboard() {
         <div className="dashboard">
             <div className="dashboard-greeting">
                 <h1>{getGreeting()}, <span className="name">{name}</span></h1>
-                <p className="streak-msg">💪 Let's crush today's goals!</p>
+                <p className="streak-msg"> Let's crush today's goals!</p>
             </div>
 
             <div className="stat-cards">
                 <div className="glass-card stat-card">
-                    <div className="stat-card-icon red">🔥</div>
+                    <div className="stat-card-icon red"></div>
                     <div className="stat-value">{totalBurned.toLocaleString()}</div>
                     <div className="stat-label">Calories Burned</div>
                 </div>
                 <div className="glass-card stat-card">
-                    <div className="stat-card-icon green">💪</div>
+                    <div className="stat-card-icon green"></div>
                     <div className="stat-value">{workoutCount}</div>
                     <div className="stat-label">Workouts Done</div>
                 </div>
                 <div className="glass-card stat-card">
-                    <div className="stat-card-icon yellow">🍽️</div>
+                    <div className="stat-card-icon yellow">️</div>
                     <div className="stat-value">{totalEaten.toLocaleString()}</div>
                     <div className="stat-label">Calories Eaten</div>
                 </div>

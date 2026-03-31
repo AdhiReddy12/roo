@@ -79,7 +79,7 @@ export default function ForgotPassword() {
     return (
         <div className="auth-page">
             <div className="auth-header">
-                <div className="auth-icon">🔑</div>
+                <div className="auth-icon"></div>
                 <h1>Reset Password</h1>
                 <p>
                     {step === 1 && 'Enter your email to get started'}
@@ -94,7 +94,7 @@ export default function ForgotPassword() {
                     <div className="input-group">
                         <label htmlFor="fp-email">Email</label>
                         <div className="input-field">
-                            <span className="icon">✉</span>
+                            <span className="icon"></span>
                             <input
                                 id="fp-email"
                                 type="email"
@@ -128,7 +128,7 @@ export default function ForgotPassword() {
                     <div className="input-group">
                         <label>Security Question</label>
                         <div className="input-field" style={{ opacity: 0.7, cursor: 'default' }}>
-                            <span className="icon">❓</span>
+                            <span className="icon"></span>
                             <input type="text" value={securityQuestion} disabled />
                         </div>
                     </div>
@@ -136,7 +136,7 @@ export default function ForgotPassword() {
                     <div className="input-group">
                         <label htmlFor="fp-answer">Your Answer</label>
                         <div className="input-field">
-                            <span className="icon">💬</span>
+                            <span className="icon"></span>
                             <input
                                 id="fp-answer"
                                 type="text"
@@ -151,7 +151,7 @@ export default function ForgotPassword() {
                     <div className="input-group">
                         <label htmlFor="fp-new-pw">New Password</label>
                         <div className="input-field">
-                            <span className="icon">🔒</span>
+                            <span className="icon"></span>
                             <input
                                 id="fp-new-pw"
                                 type="password"
@@ -166,7 +166,7 @@ export default function ForgotPassword() {
                     <div className="input-group">
                         <label htmlFor="fp-confirm-pw">Confirm Password</label>
                         <div className="input-field">
-                            <span className="icon">🔒</span>
+                            <span className="icon"></span>
                             <input
                                 id="fp-confirm-pw"
                                 type="password"
