@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signupUser } from '../api/auth';
 import './Auth.css';
+import PageReveal from '../components/PageReveal';
 
 const SECURITY_QUESTIONS = [
     'What is your pet\'s name?',
@@ -63,7 +64,7 @@ export default function Signup() {
     };
 
     return (
-        <div className="auth-page">
+        <PageReveal className="auth-page">
             <div className="auth-header">
                 <div className="auth-icon"></div>
                 <h1>Create Account</h1>
@@ -173,6 +174,6 @@ export default function Signup() {
                     Already have an account? <Link to="/login">Log In</Link>
                 </p>
             </form>
-        </div>
+        </PageReveal>
     );
 }

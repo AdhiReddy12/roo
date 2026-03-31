@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { loginUser } from '../api/auth';
 import './Auth.css';
+import PageReveal from '../components/PageReveal';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -32,7 +33,7 @@ export default function Login() {
     };
 
     return (
-        <div className="auth-page">
+        <PageReveal className="auth-page">
             <div className="auth-header">
                 <div className="auth-icon"></div>
                 <h1>Welcome Back</h1>
@@ -105,6 +106,6 @@ export default function Login() {
                     Don't have an account? <Link to="/signup">Sign Up</Link>
                 </p>
             </form>
-        </div>
+        </PageReveal>
     );
 }

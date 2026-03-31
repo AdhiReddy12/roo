@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { predictCalories, saveCaloriePrediction, fetchCaloriePredictions } from '../api/auth';
 import './CaloriePredictor.css';
+import PageReveal from '../components/PageReveal';
 
 const EXERCISE_TYPES = [
     { value: 'Running', emoji: '', label: 'Running' },
@@ -126,7 +127,7 @@ export default function CaloriePredictor() {
     };
 
     return (
-        <div className="calorie-predictor-page">
+        <PageReveal className="calorie-predictor-page">
             <h1>Calorie AI</h1>
             <p className="subtitle">Predict calories burned using our AI model trained on 10,000+ workout sessions</p>
 
@@ -348,6 +349,6 @@ export default function CaloriePredictor() {
                     </div>
                 )}
             </div>
-        </div>
+        </PageReveal>
     );
 }

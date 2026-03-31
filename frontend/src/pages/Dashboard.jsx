@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import PageReveal from '../components/PageReveal';
 import { fetchDashboard } from '../api/auth';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
@@ -51,7 +52,7 @@ export default function Dashboard() {
     }
 
     return (
-        <div className="dashboard">
+        <PageReveal className="dashboard">
             <div className="dashboard-greeting">
                 <h1>{getGreeting()}, <span className="name">{name}</span></h1>
                 <p className="streak-msg"> Let's crush today's goals!</p>
@@ -95,6 +96,6 @@ export default function Dashboard() {
                     </ResponsiveContainer>
                 </div>
             </div>
-        </div>
+        </PageReveal>
     );
 }

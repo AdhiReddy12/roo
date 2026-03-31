@@ -118,53 +118,11 @@ export async function fetchWorkouts(credentials) {
 
 export async function generateWorkoutPlan(credentials, { age, weight, height, gender, fitness_level, equipment, goal, days_per_week, duration }) {
     // Workout plan generation is handled server-side in the future.
-    // For now, return a simple plan based on the goal.
-    const exercises = {
-        fat_loss: [
-            { name: 'Treadmill Intervals', type: 'Cardio', duration: 20, calories: 250 },
-            { name: 'Jump Rope', type: 'Cardio', duration: 10, calories: 150 },
-            { name: 'Burpees', type: 'HIIT', duration: 10, calories: 130 },
-            { name: 'Mountain Climbers', type: 'HIIT', duration: 8, calories: 100 },
-            { name: 'Plank Hold', type: 'Core', duration: 5, calories: 30 },
-        ],
-        muscle_gain: [
-            { name: 'Barbell Bench Press', type: 'Strength', duration: 12, calories: 95 },
-            { name: 'Incline Dumbbell Press', type: 'Strength', duration: 10, calories: 80 },
-            { name: 'Cable Crossovers', type: 'Isolation', duration: 8, calories: 55 },
-            { name: 'Overhead Triceps Extension', type: 'Isolation', duration: 8, calories: 50 },
-            { name: 'Treadmill Intervals', type: 'Cardio', duration: 15, calories: 180 },
-        ],
-        strength: [
-            { name: 'Deadlifts', type: 'Strength', duration: 15, calories: 120 },
-            { name: 'Squats', type: 'Strength', duration: 12, calories: 110 },
-            { name: 'Overhead Press', type: 'Strength', duration: 10, calories: 85 },
-            { name: 'Barbell Rows', type: 'Strength', duration: 10, calories: 80 },
-            { name: 'Farmer\'s Walk', type: 'Functional', duration: 8, calories: 60 },
-        ],
-        endurance: [
-            { name: 'Cycling', type: 'Cardio', duration: 25, calories: 300 },
-            { name: 'Running', type: 'Cardio', duration: 20, calories: 250 },
-            { name: 'Rowing Machine', type: 'Cardio', duration: 15, calories: 180 },
-            { name: 'Swimming Laps', type: 'Cardio', duration: 20, calories: 220 },
-            { name: 'Jump Rope', type: 'Cardio', duration: 10, calories: 150 },
-        ],
-        general_fitness: [
-            { name: 'Push-ups', type: 'Bodyweight', duration: 10, calories: 70 },
-            { name: 'Squats', type: 'Bodyweight', duration: 10, calories: 80 },
-            { name: 'Plank', type: 'Core', duration: 5, calories: 30 },
-            { name: 'Jumping Jacks', type: 'Cardio', duration: 10, calories: 100 },
-            { name: 'Stretching', type: 'Flexibility', duration: 10, calories: 30 },
-        ],
-    };
-
-    const selected = exercises[goal] || exercises.general_fitness;
-    const totalDuration = selected.reduce((sum, e) => sum + e.duration, 0);
-    const totalCalories = selected.reduce((sum, e) => sum + e.calories, 0);
-
+    // Feature currently disabled. Return empty stub.
     return {
-        exercises: [...selected],
-        total_duration: totalDuration,
-        total_calories: totalCalories,
+        exercises: [],
+        total_duration: 0,
+        total_calories: 0,
     };
 }
 
@@ -211,61 +169,13 @@ export async function fetchMealSummary(credentials) {
 // ---- Food Plan Generation ----
 
 export async function generateFoodPlan(credentials, { age, gender, height, weight, goal, meal_type, diet_type }) {
-    // Food plan generation — uses predefined food lists
-    const VEG_FOODS = {
-        breakfast: [
-            { food_name: 'Oatmeal with Banana', calories: 260, protein: 8, fats: 4, serving: '1 bowl' },
-            { food_name: 'Paneer Paratha', calories: 320, protein: 12, fats: 14, serving: '2 pieces' },
-            { food_name: 'Idli with Sambar', calories: 220, protein: 7, fats: 3, serving: '3 idlis' },
-            { food_name: 'Greek Yogurt Bowl', calories: 180, protein: 17, fats: 2, serving: '1 cup' },
-        ],
-        lunch: [
-            { food_name: 'Dal Tadka + Rice', calories: 380, protein: 14, fats: 8, serving: '1 plate' },
-            { food_name: 'Rajma Chawal', calories: 420, protein: 16, fats: 7, serving: '1 plate' },
-            { food_name: 'Paneer Butter Masala + Roti', calories: 450, protein: 20, fats: 22, serving: '1 plate' },
-            { food_name: 'Vegetable Biryani', calories: 360, protein: 10, fats: 12, serving: '1 plate' },
-        ],
-        dinner: [
-            { food_name: 'Mixed Vegetable Curry + Chapati', calories: 310, protein: 10, fats: 9, serving: '1 plate' },
-            { food_name: 'Palak Paneer + Rice', calories: 400, protein: 18, fats: 16, serving: '1 plate' },
-            { food_name: 'Moong Dal Khichdi', calories: 280, protein: 12, fats: 5, serving: '1 bowl' },
-            { food_name: 'Curd Rice', calories: 240, protein: 8, fats: 4, serving: '1 bowl' },
-        ],
-    };
-
-    const NONVEG_FOODS = {
-        breakfast: [
-            { food_name: 'Egg Omelette + Toast', calories: 310, protein: 18, fats: 14, serving: '2 eggs' },
-            { food_name: 'Boiled Eggs + Avocado', calories: 280, protein: 16, fats: 18, serving: '2 eggs' },
-            { food_name: 'Chicken Sausage Wrap', calories: 350, protein: 22, fats: 15, serving: '1 wrap' },
-            { food_name: 'Protein Pancakes', calories: 300, protein: 25, fats: 8, serving: '3 pieces' },
-        ],
-        lunch: [
-            { food_name: 'Grilled Chicken Breast + Rice', calories: 450, protein: 38, fats: 8, serving: '1 plate' },
-            { food_name: 'Chicken Biryani', calories: 500, protein: 25, fats: 16, serving: '1 plate' },
-            { food_name: 'Fish Curry + Roti', calories: 380, protein: 30, fats: 12, serving: '1 plate' },
-            { food_name: 'Egg Fried Rice', calories: 420, protein: 15, fats: 14, serving: '1 plate' },
-        ],
-        dinner: [
-            { food_name: 'Salmon Fillet + Salad', calories: 350, protein: 32, fats: 16, serving: '200g' },
-            { food_name: 'Chicken Tikka + Naan', calories: 460, protein: 28, fats: 18, serving: '1 plate' },
-            { food_name: 'Mutton Keema + Chapati', calories: 480, protein: 26, fats: 22, serving: '1 plate' },
-            { food_name: 'Grilled Fish + Veggies', calories: 300, protein: 28, fats: 10, serving: '1 plate' },
-        ],
-    };
-
-    const db = diet_type === 'veg' ? VEG_FOODS : NONVEG_FOODS;
-    const items = db[meal_type] || db.lunch;
-
-    const totalCalories = items.reduce((sum, i) => sum + i.calories, 0);
-    const totalProtein = items.reduce((sum, i) => sum + i.protein, 0);
-    const totalFats = items.reduce((sum, i) => sum + i.fats, 0);
-
+    // Food plan generation is handled server-side in the future.
+    // Feature currently disabled. Return empty stub.
     return {
-        items: [...items],
-        total_calories: totalCalories,
-        total_protein: totalProtein,
-        total_fats: totalFats,
+        items: [],
+        total_calories: 0,
+        total_protein: 0,
+        total_fats: 0,
     };
 }
 

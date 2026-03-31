@@ -1,9 +1,10 @@
 import React from 'react';
 import './Workout.css';
+import PageReveal from '../components/PageReveal';
 
 export default function Workout() {
     return (
-        <div className="workout-page" style={{
+        <PageReveal className="workout-page" style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -19,6 +20,6 @@ export default function Workout() {
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}></div>
                 <h3>Feature work</h3>
             </div>
-        </div>
+        </PageReveal>
     );
 }

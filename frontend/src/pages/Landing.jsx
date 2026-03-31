@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import './Landing.css';
+import PageReveal from '../components/PageReveal';
 
 export default function Landing() {
     return (
-        <div className="landing">
+        <PageReveal className="landing">
             <section className="landing-hero">
                 <div className="hero-badge">
                     <span className="badge-icon"></span>
@@ -39,22 +40,22 @@ export default function Landing() {
 
                 <div className="glass-card feature-card">
                     <div className="feature-icon red"></div>
-                    <h3>Live Posture Check</h3>
-                    <p>Real-time form correction using MediaPipe during your exercises.</p>
+                    <h3>Workout Plans</h3>
+                    <p>Create you own personal workout plans through our workouts section</p>
                 </div>
 
                 <div className="glass-card feature-card">
                     <div className="feature-icon yellow">️</div>
                     <h3>Food Tracking</h3>
-                    <p>Log meals by text or photo. AI recognizes food and calculates macros.</p>
+                    <p>Log meals by text. AI recognizes food and calculates macros.</p>
                 </div>
 
                 <div className="glass-card feature-card">
                     <div className="feature-icon purple"></div>
-                    <h3>Streak System</h3>
-                    <p>Stay consistent with daily workout streaks and progress tracking.</p>
+                    <h3>BMI Calculater</h3>
+                    <p>Calculate your BMI and track your progress.</p>
                 </div>
             </section>
-        </div>
+        </PageReveal>
     );
 }

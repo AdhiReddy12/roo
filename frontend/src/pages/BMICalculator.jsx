@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './BMICalculator.css';
+import PageReveal from '../components/PageReveal';
 
 const BMI_CATEGORIES = [
     { max: 18.5, label: 'Underweight', color: '#60a5fa', emoji: '', advice: 'Consider a calorie-surplus diet with strength training.' },
@@ -40,7 +41,7 @@ export default function BMICalculator() {
     const gaugePercent = result ? Math.min(Math.max(((parseFloat(result.bmi) - 10) / 30) * 100, 0), 100) : 0;
 
     return (
-        <div className="bmi-page">
+        <PageReveal className="bmi-page">
             <h1>BMI Calculator</h1>
             <p className="subtitle">Calculate your Body Mass Index</p>
 
@@ -158,6 +159,6 @@ export default function BMICalculator() {
                     )}
                 </div>
             </div>
-        </div>
+        </PageReveal>
     );
 }

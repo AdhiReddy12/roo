@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { fetchWorkouts, updateProfile } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 import './Profile.css';
+import PageReveal from '../components/PageReveal';
 
 export default function Profile() {
     const { user, token, logout, setUser } = useAuth();
@@ -72,7 +73,7 @@ export default function Profile() {
     };
 
     return (
-        <div className="profile-page">
+        <PageReveal className="profile-page">
             <h1>Profile</h1>
             <p className="subtitle">Your fitness profile and progress</p>
 
@@ -206,6 +207,6 @@ export default function Profile() {
             <button className="profile-logout-btn" onClick={handleLogout}>
                 <span></span> Logout
             </button>
-        </div>
+        </PageReveal>
     );
 }

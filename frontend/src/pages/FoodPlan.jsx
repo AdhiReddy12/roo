@@ -1,9 +1,10 @@
 import React from 'react';
 import './FoodPlan.css';
+import PageReveal from '../components/PageReveal';
 
 export default function FoodPlan() {
     return (
-        <div className="food-plan-page" style={{
+        <PageReveal className="food-plan-page" style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -19,7 +20,7 @@ export default function FoodPlan() {
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}></div>
                 <h3>Feature work</h3>
             </div>
-        </div>
+        </PageReveal>
     );
 }
 
