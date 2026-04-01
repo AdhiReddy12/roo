@@ -5,16 +5,16 @@ import './CaloriePredictor.css';
 import PageReveal from '../components/PageReveal';
 
 const EXERCISE_TYPES = [
-    { value: 'Running', emoji: '', label: 'Running' },
-    { value: 'Cycling', emoji: '', label: 'Cycling' },
-    { value: 'Swimming', emoji: '', label: 'Swimming' },
-    { value: 'Walking', emoji: '', label: 'Walking' },
-    { value: 'HIIT', emoji: '', label: 'HIIT' },
-    { value: 'Weight Training', emoji: '️', label: 'Weights' },
-    { value: 'Yoga', emoji: '', label: 'Yoga' },
-    { value: 'Jump Rope', emoji: '', label: 'Jump Rope' },
-    { value: 'Rowing', emoji: '', label: 'Rowing' },
-    { value: 'Elliptical', emoji: '', label: 'Elliptical' },
+    { value: 'Running', label: 'Running' },
+    { value: 'Cycling', label: 'Cycling' },
+    { value: 'Swimming', label: 'Swimming' },
+    { value: 'Walking', label: 'Walking' },
+    { value: 'HIIT', label: 'HIIT' },
+    { value: 'Weight Training', label: 'Weights' },
+    { value: 'Yoga', label: 'Yoga' },
+    { value: 'Jump Rope', label: 'Jump Rope' },
+    { value: 'Rowing', label: 'Rowing' },
+    { value: 'Elliptical', label: 'Elliptical' },
 ];
 
 const INTENSITY_OPTIONS = [
@@ -53,7 +53,7 @@ export default function CaloriePredictor() {
         if (token) {
             fetchCaloriePredictions(token)
                 .then(setHistory)
-                .catch(() => {})
+                .catch(() => { })
                 .finally(() => setHistoryLoading(false));
         } else {
             setHistoryLoading(false);
@@ -179,7 +179,7 @@ export default function CaloriePredictor() {
                             {saving ? ' Saving…' : ' Save Prediction'}
                         </button>
                         <button className="reset-btn" onClick={handleReset}>
-                             New Prediction
+                            New Prediction
                         </button>
                     </div>
                 </div>
